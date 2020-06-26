@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace 绑定DAO-->
+<mapper namespace="com.demo.mybatisplay.dao.NameMapper">
+    <!--id 方法名-->
+    <select id="getNameList" resultType="com.demo.mybatisplay.pojo.Name">
+      select * from table1
+    </select>
+
+    <select id="getNameById" parameterType="int" resultType="com.demo.mybatisplay.pojo.Name">
+      select * from table1 where id = #{id}
+    </select>
+
+    <!--对象中的属性可以直接取出来-->
+    <insert id="addName" parameterType="com.demo.mybatisplay.pojo.Name">
+        insert into table1 (id, name) values (#{id}, #{name})
+    </insert>
+
+    <update id="updateName" parameterType="com.demo.mybatisplay.pojo.Name">
+        update table1 set name=#{name} where  id=#{id}
+    </update>
+
+    <delete id="deleteNameById" parameterType="int">
+        delete from table1 where  id = #{id}
+    </delete>
+
+    <!--对象中的属性可以直接取出来-->
+    <insert id="addName2" parameterType="map">
+        insert into table1 (id, name) values (#{userId}, #{userName})
+    </insert>
+
+    <!--防止sql注入写死分配符-->
+    <select id="getNameLike" resultType="com.demo.mybatisplay.pojo.Name">
+      select * from table1 where name like #{value}"%"
+    </select>
+</mapper>
